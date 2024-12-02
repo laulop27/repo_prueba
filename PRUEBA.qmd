@@ -1,0 +1,40 @@
+---
+title: "prueba"
+author: "LAULOP"
+format: 
+  revealjs:
+    embed-resources: true 
+editor: visual
+execute: 
+  echo: true
+---
+
+## CARGA DE DATOS
+```{r}
+library(tidyverse)
+datos <- read_csv(file = "./datos/accidentes.csv")
+datos
+```
+---
+
+## RESUMEN
+```{r}
+resumen <- 
+  datos |> 
+  count(sexo)
+
+```
+
+
+---
+## Visualizacion de los datos
+```{r}
+#| code-fold: true #esto es para hacer lo de la pestañita del codigo
+gg <- ggplot(resumen)+
+  geom_col(aes(x=sexo, y= n, fill = sexo ), alpha=0.56) +
+  ggthemes::scale_fill_colorblind()+
+  theme_minimal()
+plotly::ggplotly(gg) #esto es para que el grafico sea interactivo
+```
+
+
